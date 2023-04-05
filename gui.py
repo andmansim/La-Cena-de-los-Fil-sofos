@@ -10,3 +10,7 @@ class Ventana(tk.Frame):
 ventana = Ventana()
 ventana.mainloop()'''
 
+ventana = tk.Tk()
+bot = tk.Button(ventana, text = 'NS', width = 25)
+bot.grid(column=0, row = 0, padx = 5, pady=5 ) #posición 
+ventana.mainloop()
