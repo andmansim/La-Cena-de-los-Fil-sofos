@@ -3,14 +3,19 @@ import threading
 import time
 
 class Filosofo(threading.Thread):
-    lock = threading.Lock()
-    def __init__(self, numero, palillo):
+    semaforo = threading.Lock()
+    palillos= []
+    estado = []
+    num = 0
+    def __init__(self):
         super().__init__()
         
         #atributos del problema
-        self.palillo = palillo
-        self.numero = numero
-        self.temp = self.numero + 1 % 5
+        self.id = Filosofo.num
+        Filosofo.num +=1
+        Filosofo.estado.append('Pensando')
+        Filosofo.palillos.append(threading.Semaphore(0)) #establece el semaforo del palillo de la izquierda
+        
     def comer(self):
         print(f'El filósofo {self.numero} está comiendo') 
         
@@ -20,7 +25,8 @@ class Filosofo(threading.Thread):
     def Palilloiz(self):
         print(f'El filósofo {self.numero} obtiene el palillo izquierdo')
         print(f'Obtiene el palillo {self.numero}')
-        self.palillo[self.numero].acquire()
+        #self.palillo[self.numero].acquire()
+        Filosofo.lock.acquire()
     
     def Palillode(self):
         print(f'El filósofo {self.numero} obtiene el palillo derecho')
@@ -44,7 +50,7 @@ class Filosofo(threading.Thread):
             self.liberaPaliz()
 
 numfilosfos = 5
-palillos = ['1', '1', '1', '1', '1']
+
 
 for i in range (0,4):
     t = Filosofo(i, palillos)
