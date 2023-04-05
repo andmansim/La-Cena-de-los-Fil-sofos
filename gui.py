@@ -31,6 +31,7 @@ cinco= texto(7, 2, '5', 'blue')
 
 t = texto (5, 10, 'Código de colores:', None)
 t1 = texto(12, 1, 'Log', None)
+t2 = texto(13, 10, 'Cuántas veces han comido:', None)
 rosa = cuadrado(6, 10, 'pink')
 texto(6, 11, 'Filósofo entra a comer', None)
 azul_c = cuadrado(7, 10, 'light blue')
