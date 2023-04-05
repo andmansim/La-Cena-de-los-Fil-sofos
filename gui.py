@@ -7,7 +7,10 @@ ventana = Tk()
 etiqueta = Label(ventana, text='La cena de los filósofos')
 etiqueta.grid(column=1, row=0, pady = 5)
 
-
+def cuadrados(f, c, color):
+    c = Frame()
+    c.grid(row=f, column=c)
+    c.config(width='10', height='20', bg = color)
 
 
 def texto(f, c, palabra, color) :
@@ -25,6 +28,13 @@ tres = texto(7, 6, '3', 'blue')
 cuatro= texto(8, 4, '4', 'blue')
 cinco= texto(7, 2, '5', 'blue')
 
+t = texto (4, 10, 'Código de colores:', None)
+rosa = cuadrados(6, 10, 'pink')
+azul_c = cuadrados(7, 10, 'light blue')
+naranja = cuadrados(8, 10, 'orange')
+blanco = cuadrados(9, 10, 'white')
+azul_o =cuadrados(10, 10, 'blue')
+gris = cuadrados(11, 10, 'gray')
 #marco_principal.config(width='1050', height='630')
 
 botsalir = Button(ventana, text='Salir')
