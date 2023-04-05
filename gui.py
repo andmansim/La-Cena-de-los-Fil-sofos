@@ -18,8 +18,8 @@ def texto(f, c, palabra, color) :
     Label(ventana, text = palabra, bg= color).grid(row=f, column=c)
     
 filo0 = texto(4, 4, 'Filósofo 1', 'pink')
-filo5 = texto(6, 2, 'Filósofo 5', 'yellow')
-filo3 = texto(8, 3, 'Filósofo 3', 'yellow')
+filo5 = texto(6, 2, 'Filósofo 5', 'orange')
+filo3 = texto(8, 3, 'Filósofo 3', 'orange')
 filo2 = texto(6, 6, 'Filósofo 2', 'white')
 filo4 = texto(8, 5, 'Filósofo 4', 'pink')
 
@@ -32,6 +32,7 @@ cinco= texto(7, 2, '5', 'blue')
 t = texto (5, 10, 'Código de colores:', None)
 t1 = texto(12, 1, 'Log', None)
 t2 = texto(13, 10, 'Cuántas veces han comido:', None)
+
 rosa = cuadrado(6, 10, 'pink')
 texto(6, 11, 'Filósofo entra a comer', None)
 azul_c = cuadrado(7, 10, 'light blue')
@@ -46,7 +47,12 @@ gris = cuadrado(11, 10, 'gray')
 texto(11, 11, 'Tenedor libre', None)
 #marco_principal.config(width='1050', height='630')
 
-botsalir = Button(ventana, text='Salir')
+caja = Entry(state='readonly')
+caja.insert(0, 'AAA')
+caja.place(x=99, y = 250)
+
+
+botsalir = Button(ventana, text='Salir').place(x = 200, y = 600)
 botcreditos = Button(ventana, text='Créditos').grid(sticky= E)
 botpausar = Button(ventana, text='Pausar').grid(sticky= E)
 botiniciar= Button(ventana, text='Iniciar').grid(sticky= E)
