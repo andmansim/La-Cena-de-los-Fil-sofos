@@ -47,9 +47,13 @@ gris = cuadrado(11, 10, 'gray')
 texto(11, 11, 'Tenedor libre', None)
 #marco_principal.config(width='1050', height='630')
 
-st.ScrolledText(ventana, width= 50, height = 10).place(x=70, y= 250)
-a = ttk.LabelFrame(ventana, text='Patata')
-a.grid(column=0, row=1)
+#st.ScrolledText(ventana, width= 50, height = 10).place(x=70, y= 250)
+'''a = ttk.LabelFrame(ventana, text='Patata')
+a.grid(column=14, row=14, padx=5, pady=5, sticky= 'w')'''
+
+labelframe1=ttk.LabelFrame(ventana, text="Region")
+labelframe1.grid(column=0, row=1, padx=5, pady=5, sticky="w")
+
 
 botsalir = Button(ventana, text='Salir').place(x = 640, y = 565)
 botcreditos = Button(ventana, text='Créditos').place(x = 640, y = 600)
