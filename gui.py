@@ -22,6 +22,7 @@ def numeros(f, c, color):
     n.config(bg=color)
     
 filo0 = cajas_filo(4, 4, 'pink')
+
 filo5 = cajas_filo(6, 2, 'yellow')
 filo3 = cajas_filo(8, 3, 'yellow')
 filo2 = cajas_filo(6, 6, 'white')
@@ -34,4 +35,6 @@ cuatro= numeros(8, 4, 'blue')
 cinco= numeros(7, 2, 'blue')
 #marco_principal.config(width='1050', height='630')
 
+botsalir = Button(ventana, text='Salir').grid(sticky= S+W)
+botcreditos = Button(ventana, text='Créditos').grid(sticky= E+W)
 ventana.mainloop()
