@@ -32,11 +32,12 @@ class Filosofo(threading.Thread):
         
     
     def verificar(self, a):
+        if a == 5:
+            a = 0
         a2 = a +1
         if a2 == 5:
             a2 =  0
-        if a == 5:
-            a = 0
+        
         print(a)
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
@@ -56,7 +57,7 @@ class Filosofo(threading.Thread):
         
     
     def run(self):
-        while True:
+        for i in range(tiempo):
             self.pensar()
             self.hambre()
             self.comer()
@@ -64,7 +65,7 @@ class Filosofo(threading.Thread):
 
 
 numfilosfos = 5
-
+tiempo = 3
 #primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
 lista = []
 for i in range (numfilosfos):
