@@ -38,7 +38,6 @@ class Filosofo(threading.Thread):
         if a2 == 5:
             a2 =  0
         
-        print(a)
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
