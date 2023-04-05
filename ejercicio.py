@@ -13,46 +13,57 @@ class Filosofo(threading.Thread):
         #atributos del problema
         self.id = Filosofo.num
         Filosofo.num +=1
-        Filosofo.estado.append('Pensando')
+        Filosofo.estado.append('pensando')
         Filosofo.palillos.append(threading.Semaphore(0)) #establece el semaforo del palillo de la izquierda
+        print(f'Filósofo {self.id} está {Filosofo.estado[self.id]}')
+   
+   
+    def pensar(self): 
+        a = random.randint(0.5)
+        time.sleep(a)
+        print(f'El filósofo {self.id} está pensando {a}')
+    
+    def hambre(self):
+        Filosofo.semaforo.acquire() #señala que tomará los palillos exclusión mutua
+        Filosofo.estado[self.id] = 'hambriento'
+        self.verificar(self.id) #Si no puede comer no se bloquea
+        Filosofo.semaforo.release() #deja de señala que va a tomar los palillos
+        Filosofo.palillos[self.id].acquire() #coge los palillos
+        
+    
+    def verificar(self, a):
+        if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a+1] != 'comiendo'.
+            Filosofo.estado[a] = 'comiendo'
+            Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
         
     def comer(self):
-        print(f'El filósofo {self.numero} está comiendo') 
+        print(f'Filosofo {self.id} está {Filosofo.estado[self.id]}')
+        time.sleep(3)
+        print(f'Filosofo {self.id} ha terminado de comer')
+    
+    def liberar(self):
+        Filosofo.semaforo.acquire()
+        Filosofo.estado[self.id] = 'penando'
+        self.verificar(self.id -1)
+        self.verificar(self.id +1)
+        Filosofo.semaforo.release()
         
-    def pensar(self):
-        print(f'El filósofo {self.numero} está pensando')
-    
-    def Palilloiz(self):
-        print(f'El filósofo {self.numero} obtiene el palillo izquierdo')
-        print(f'Obtiene el palillo {self.numero}')
-        #self.palillo[self.numero].acquire()
-        Filosofo.lock.acquire()
-    
-    def Palillode(self):
-        print(f'El filósofo {self.numero} obtiene el palillo derecho')
-        self.palillo[self.temp].acquire()
-    
-    def liberaPaliz(self):
-        print(f'El filósofo {self.numero} libera el palillo izquierdo')
-        self.palillo[self.numero].release()
-    
-    def liberaPalde(self):
-        print(f'El filósofo {self.numero} libera el palillo derecho')
-        self.palillo[self.temp].release()
     
     def run(self):
         while True:
             self.pensar()
-            self.Palilloiz()
-            self.Palillode()
+            self.hambre()
             self.comer()
-            self.liberaPalde()
-            self.liberaPaliz()
+            self.liberar()
+
 
 numfilosfos = 5
 
-
-for i in range (0,4):
-    t = Filosofo(i, palillos)
-    t.start()
-    time.sleep(0.5)
+#primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
+lista = []
+for i in range (numfilosfos):
+    lista.append(Filosofo())
+for i in lista:
+    #pasamos por cada filósofo para establecer un tirmpo de pensar, comer, etc.
+    i.start()
+ 
