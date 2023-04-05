@@ -18,14 +18,20 @@ def cajas_filo(f,c, color):
 def numeros(f, c, color):
     n =Frame()
     n.grid(row=f, column=c)
-    n.config(width='10', height='10')
+    n.config(width='15', height='15')
     n.config(bg=color)
     
 filo0 = cajas_filo(4, 4, 'pink')
 filo5 = cajas_filo(6, 2, 'yellow')
 filo3 = cajas_filo(8, 3, 'yellow')
-filo2 = cajas_filo(6, 6, 'gray')
+filo2 = cajas_filo(6, 6, 'white')
 filo4 = cajas_filo(8, 5, 'pink')
+
+uno = numeros(4, 3, 'blue')
+dos = numeros(5,5,'gray')
+tres = numeros(7, 6, 'blue')
+cuatro= numeros(8, 4, 'blue')
+cinco= numeros(7, 2, 'blue')
 #marco_principal.config(width='1050', height='630')
 
 ventana.mainloop()
