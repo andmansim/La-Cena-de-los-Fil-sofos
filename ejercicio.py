@@ -21,7 +21,7 @@ class Filosofo(threading.Thread):
     def pensar(self): 
         a = random.randint(0,5)
         time.sleep(a)
-        print(f'El filósofo {self.id} está pensando {a}\t')
+
     
     def hambre(self):
         Filosofo.semaforo.acquire() #señala que tomará los palillos exclusión mutua
@@ -33,16 +33,19 @@ class Filosofo(threading.Thread):
     
     def verificar(self, a):
         a2 = a +1
-        if a + 1 == 5:
+        if a2 == 5:
             a2 =  0
+        if a == 5:
+            a = 0
+        print(a)
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
         
     def comer(self):
-        print(f'Filosofo {self.id} está {Filosofo.estado[self.id]}')
+        print(f'Filosofo {self.id} está {Filosofo.estado[self.id]} \t')
         time.sleep(3)
-        print(f'Filosofo {self.id} ha terminado de comer')
+        print(f'Filosofo {self.id} ha terminado de comer \t')
     
     def liberar(self):
         Filosofo.semaforo.acquire()
