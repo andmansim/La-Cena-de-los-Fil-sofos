@@ -3,8 +3,10 @@ import threading
 import time
 
 class Filosofo(threading.Thread):
+    lock = threading.Lock()
     def __init__(self, numero, palillo):
-        threading.Thread.__init__(self)
+        super().__init__()
+        
         #atributos del problema
         self.palillo = palillo
         self.numero = numero
@@ -40,4 +42,11 @@ class Filosofo(threading.Thread):
             self.comer()
             self.liberaPalde()
             self.liberaPaliz()
-    
+
+numfilosfos = 5
+palillos = ['1', '1', '1', '1', '1']
+
+for i in range (0,4):
+    t = Filosofo(i, palillos)
+    t.start()
+    time.sleep(0.5)
