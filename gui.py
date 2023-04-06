@@ -47,6 +47,8 @@ texto(11, 11, 'Tenedor libre', None)
 #marco_principal.config(width='1050', height='630')
 #place(x=70, y= 250)
 
+#Caja cena
+
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
@@ -81,14 +83,12 @@ e5.place(x=500, y = 150)
 c= ttk.LabelFrame(ventana, text='Controles')
 c.grid(column=1, row=14, padx=5, pady=5, sticky= 'w')
 
+crear_log= Checkbutton(c, text= 'Crear un log', variable= IntVar())
+crear_log.grid(column=0, row=2, padx=5, pady=5, sticky= 'w')
 
-st.ScrolledText(c, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
-b = ttk.Label(c, text='Cuántas veces han comido:')
-b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
-botsalir = ttk.Button(c, text='Salir')
-botsalir.place(x = 640, y = 565)
-botcreditos = ttk.Button(c, text='Créditos').place(x = 640, y = 600)
-botpausar = Button(c, text='Pausar').place(x = 440, y = 600)
-botiniciar= Button(c, text='Iniciar').place(x = 380, y = 600)
-botresert = Button(c, text='Resert').place(x = 540, y = 600)
+botsalir = ttk.Button(c, text='Salir').grid(column=5, row=1, padx=5, pady=5, sticky= 'e')
+botcreditos = ttk.Button(c, text='Créditos').grid(column=5, row=2, padx=5, pady=5, sticky= 'w')
+botpausar = ttk.Button(c, text='Pausar').grid(column=3, row=2, padx=5, pady=5, sticky= 'w')
+botiniciar= ttk.Button(c, text='Iniciar').grid(column=2, row=2, padx=5, pady=5, sticky= 'w')
+botresert = ttk.Button(c, text='Resert').grid(column=4, row=2, padx=5, pady=5, sticky= 'w')
 ventana.mainloop()
