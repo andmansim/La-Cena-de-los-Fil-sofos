@@ -3,10 +3,6 @@ from tkinter import ttk
 from tkinter import scrolledtext as st
 ventana = Tk()
 
-#ventana.geometry('1050x630')
-etiqueta = Label(ventana, text='La cena de los filósofos')
-etiqueta.grid(column=1, row=0, pady = 5)
-
 def cuadrado(filas, columnas, colores):
     c = Frame()
     c.grid(row=filas, column=columnas)
@@ -14,40 +10,39 @@ def cuadrado(filas, columnas, colores):
 
 
 
-def texto(f, c, palabra, color) :
-    Label(ventana, text = palabra, bg= color).grid(row=f, column=c)
-    
-filo0 = texto(4, 4, 'Filósofo 1', 'pink')
-filo5 = texto(6, 2, 'Filósofo 5', 'orange')
-filo3 = texto(8, 3, 'Filósofo 3', 'orange')
-filo2 = texto(6, 6, 'Filósofo 2', 'white')
-filo4 = texto(8, 5, 'Filósofo 4', 'pink')
+def texto(f, c, palabra, color, vent) :
+    Label(vent, text = palabra, bg= color).grid(row=f, column=c)
 
-uno = texto(4, 3, '1', 'blue')
-dos = texto(5, 5, '2', 'gray')
-tres = texto(7, 6, '3', 'blue')
-cuatro= texto(8, 4, '4', 'blue')
-cinco= texto(7, 2, '5', 'blue')
+cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
+cena.grid(column=1, row=1, padx=5, pady=5, sticky= 'w')
 
-t = texto (5, 10, 'Código de colores:', None)
+filo0 = texto(4, 4, 'Filósofo 1', 'pink', cena)
+filo5 = texto(6, 2, 'Filósofo 5', 'orange', cena)
+filo3 = texto(8, 3, 'Filósofo 3', 'orange', cena)
+filo2 = texto(6, 6, 'Filósofo 2', 'white', cena)
+filo4 = texto(8, 5, 'Filósofo 4', 'pink', cena)
 
+uno = texto(4, 3, '1', 'blue', cena)
+dos = texto(5, 5, '2', 'gray', cena)
+tres = texto(7, 6, '3', 'blue', cena)
+cuatro= texto(8, 4, '4', 'blue', cena)
+cinco= texto(7, 2, '5', 'blue', cena)
 
-rosa = cuadrado(6, 10, 'pink')
-texto(6, 11, 'Filósofo entra a comer', None)
-azul_c = cuadrado(7, 10, 'light blue')
-texto(7, 11, 'Filósofo tiene un palillo', None)
-naranja = cuadrado(8, 10, 'orange')
-texto(8, 11, 'Filósofo está comiendo', None)
-blanco = cuadrado(9, 10, 'white')
-texto(9, 11, 'Está pensando', None)
-azul_o =cuadrado(10, 10, 'blue')
-texto(10, 11, 'Tenedor ocupado', None)
-gris = cuadrado(11, 10, 'gray')
-texto(11, 11, 'Tenedor libre', None)
-#marco_principal.config(width='1050', height='630')
-#place(x=70, y= 250)
+t = texto (3, 9, 'Código de colores:', None, cena)
 
-#Caja cena
+rosa = texto(6, 10, None, 'pink', cena)
+fec= texto(6, 11, 'Filósofo entra a comer', None, cena)
+azul_c = texto(7, 10, None, 'light blue', cena)
+fp =texto(7, 11, 'Filósofo tiene un palillo', None, cena)
+naranja = texto(8, 10, None,'orange', cena)
+fc=texto(8, 11, 'Filósofo está comiendo', None, cena)
+blanco = texto(9, 10, None,'white', cena)
+fp=texto(9, 11, 'Está pensando', None, cena)
+azul_o =texto(10, 10,None, 'blue', cena)
+po=texto(10, 11, 'Palillo ocupado', None, cena)
+gris = texto(11, 10, None,'gray', cena)
+pl=texto(11, 11, 'Palillo libre', None, cena)
+
 
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
