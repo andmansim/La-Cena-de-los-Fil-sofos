@@ -49,11 +49,24 @@ texto(11, 11, 'Tenedor libre', None)
 #place(x=70, y= 250)
 
 #caja Log
-a = ttk.LabelFrame(ventana, text='Log')
-a.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
-st.ScrolledText(a, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
-b = ttk.Label(a, text='Cuántas veces han comido:')
+l= ttk.LabelFrame(ventana, text='Log')
+l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
+st.ScrolledText(l, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
+b = ttk.Label(l, text='Cuántas veces han comido:')
 b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
+f1 = ttk.Label(l, text='Filósofo 1')
+f1.grid(column=2, row=1, padx= 3, pady=3, sticky='e')
+f2 = ttk.Label(l, text='Filósofo 2')
+f2.grid(column=2, row=3, padx= 3, pady=3, sticky='e')
+f3 = ttk.Label(l, text='Filósofo 3')
+f3.grid(column=2, row=4, padx= 3, pady=3, sticky='e')
+f4 = ttk.Label(l, text='Filósofo 4')
+f4.grid(column=2, row=5, padx= 3, pady=3, sticky='e')
+f5 = ttk.Label(l, text='Filósofo 5')
+f5.grid(column=2, row=6, padx= 3, pady=3, sticky='e')
+
+
+
 
 
 
