@@ -76,14 +76,19 @@ e5.place(x=500, y = 150)
 
 
 
+#caja controles
+
+c= ttk.LabelFrame(ventana, text='Controles')
+c.grid(column=1, row=14, padx=5, pady=5, sticky= 'w')
 
 
-
-
-
-botsalir = Button(ventana, text='Salir').place(x = 640, y = 565)
-botcreditos = Button(ventana, text='Créditos').place(x = 640, y = 600)
-botpausar = Button(ventana, text='Pausar').place(x = 440, y = 600)
-botiniciar= Button(ventana, text='Iniciar').place(x = 380, y = 600)
-botresert = Button(ventana, text='Resert').place(x = 540, y = 600)
+st.ScrolledText(c, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
+b = ttk.Label(c, text='Cuántas veces han comido:')
+b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
+botsalir = ttk.Button(c, text='Salir')
+botsalir.place(x = 640, y = 565)
+botcreditos = ttk.Button(c, text='Créditos').place(x = 640, y = 600)
+botpausar = Button(c, text='Pausar').place(x = 440, y = 600)
+botiniciar= Button(c, text='Iniciar').place(x = 380, y = 600)
+botresert = Button(c, text='Resert').place(x = 540, y = 600)
 ventana.mainloop()
