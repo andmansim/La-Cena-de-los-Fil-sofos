@@ -55,15 +55,17 @@ st.ScrolledText(l, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
 b = ttk.Label(l, text='Cuántas veces han comido:')
 b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
 f1 = ttk.Label(l, text='Filósofo 1')
-f1.grid(column=2, row=1, padx= 3, pady=3, sticky='e')
+f1.place(x=450, y=30)
 f2 = ttk.Label(l, text='Filósofo 2')
-f2.grid(column=2, row=3, padx= 3, pady=3, sticky='e')
+f2.place(x=450, y=50)
 f3 = ttk.Label(l, text='Filósofo 3')
-f3.grid(column=2, row=4, padx= 3, pady=3, sticky='e')
+f3.place(x=450, y=70)
 f4 = ttk.Label(l, text='Filósofo 4')
-f4.grid(column=2, row=5, padx= 3, pady=3, sticky='e')
+f4.place(x=450, y=90)
 f5 = ttk.Label(l, text='Filósofo 5')
-f5.grid(column=2, row=6, padx= 3, pady=3, sticky='e')
+f5.place(x=450, y=110)
+
+
 
 
 
