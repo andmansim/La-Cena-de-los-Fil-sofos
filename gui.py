@@ -1,7 +1,7 @@
 from tkinter import*
 from tkinter import ttk
 from tkinter import scrolledtext as st
-
+import ejercicio as ej
 
 def texto_grid(f, c, palabra, color, vent) :
     Label(vent, text = palabra, bg= color).grid(row=f, column=c)
@@ -80,6 +80,7 @@ botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
 
-
+for b in ej.lista:
+    e1.insert(0, f'{ej.b.vez_comer}')
 
 ventana.mainloop()

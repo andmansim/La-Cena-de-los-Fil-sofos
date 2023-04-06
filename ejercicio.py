@@ -42,14 +42,14 @@ class Filosofo(threading.Thread):
         
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
-            self.vez_comer+=1
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
         
     def comer(self):
         print(f'Filosofo {self.id} está {Filosofo.estado[self.id]} \t')
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
-    
+        self.vez_comer+=1
+
     def liberar(self):
         Filosofo.semaforo.acquire()
         Filosofo.estado[self.id] = 'pensando'
