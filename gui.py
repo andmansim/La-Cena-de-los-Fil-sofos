@@ -30,8 +30,8 @@ cuatro= texto(8, 4, '4', 'blue')
 cinco= texto(7, 2, '5', 'blue')
 
 t = texto (5, 10, 'Código de colores:', None)
-t1 = texto(12, 1, 'Log', None)
-t2 = texto(13, 13, 'Cuántas veces han comido:', None)
+#t1 = texto(12, 1, 'Log', None)
+t2 = texto(13, 11, 'Cuántas veces han comido:', None)
 
 rosa = cuadrado(6, 10, 'pink')
 texto(6, 11, 'Filósofo entra a comer', None)
@@ -46,12 +46,14 @@ texto(10, 11, 'Tenedor ocupado', None)
 gris = cuadrado(11, 10, 'gray')
 texto(11, 11, 'Tenedor libre', None)
 #marco_principal.config(width='1050', height='630')
+#place(x=70, y= 250)
 
-#st.ScrolledText(ventana, width= 50, height = 10).place(x=70, y= 250)
-a = ttk.LabelFrame(ventana, text='Patata')
-a.grid(column=14, row=14, padx=5, pady=5, sticky= 'w')
-b = ttk.Label(a, text='Caja')
-b.grid(column=0, row=0, padx= 5, pady=5, sticky='e')
+#caja Log
+a = ttk.LabelFrame(ventana, text='Log')
+a.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
+st.ScrolledText(a, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
+b = ttk.Label(a, text='Cuántas veces han comido:')
+b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
 
 
 
