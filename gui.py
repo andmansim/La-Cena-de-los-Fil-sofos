@@ -84,3 +84,9 @@ for b in ej.lista:
     e1.insert(0, f'{ej.b.vez_comer}')
 
 ventana.mainloop()
+
+'''
+Falta pponer eltexto en las cajas de la Gui + botones
+también que se vea como va sumando en esas cajitas y no solo el rsultado final. 
+Lo de arrba e1.insert no funciona
+'''
