@@ -6,6 +6,7 @@ class Filosofo(threading.Thread):
     semaforo = threading.Lock()
     palillos= []
     estado = []
+
     num = 0
     def __init__(self):
         super().__init__()
@@ -13,6 +14,7 @@ class Filosofo(threading.Thread):
         #atributos del problema
         self.id = Filosofo.num
         Filosofo.num +=1
+        self.vez_comer = 0
         Filosofo.estado.append('pensando')
         Filosofo.palillos.append(threading.Semaphore(0)) #establece el semaforo del palillo de la izquierda
         print(f'Filósofo {self.id} está {Filosofo.estado[self.id]}')
@@ -40,6 +42,7 @@ class Filosofo(threading.Thread):
         
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
+            self.vez_comer+=1
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
         
     def comer(self):
@@ -61,7 +64,7 @@ class Filosofo(threading.Thread):
             self.hambre()
             self.comer()
             self.liberar()
-
+        
 
 numfilosfos = 5
 tiempo = 3
@@ -72,4 +75,9 @@ for i in range (numfilosfos):
 for i in lista:
     #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
     i.start()
- 
+
+for a in lista:
+    a.join()
+
+for b in lista:
+    print(b.id, b.vez_comer)

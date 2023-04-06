@@ -1,7 +1,7 @@
 from tkinter import*
 from tkinter import ttk
 from tkinter import scrolledtext as st
-ventana = Tk()
+
 
 def texto_grid(f, c, palabra, color, vent) :
     Label(vent, text = palabra, bg= color).grid(row=f, column=c)
@@ -14,7 +14,9 @@ def entry(f, c, tipo, vent) :
 
 def boton(f, c, palabra, vent):
     ttk.Button(vent, text=palabra).grid(row=f, column=c)
-    
+
+
+ventana = Tk() 
 cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
 cena.grid(column=1, row=1, padx=5, pady=5, sticky= 'w')
 
