@@ -78,7 +78,9 @@ class Filosofo(threading.Thread):
             n = self.control(uno, dos, tres, cuatro, cinco)
             n.config(bg='blue')
             
-            
+    def __del__(self):
+        pass
+        
         
     def comer(self):
         print(f'Filosofo {self.id} está {Filosofo.estado[self.id]} \t')
@@ -159,8 +161,7 @@ def empezar():
     for i in lista:
         #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
         i.start()
-    for i in lista:
-        i.join()
+    
     
 def cerrar_ventana():
     ventana.destroy()
@@ -208,6 +209,8 @@ tiempo = 3
 lista = []
 
 
+def parar1(lista):
+    del lista
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
@@ -248,11 +251,13 @@ botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
 
 def parar1():
-    hilo = threading.current_thread()
-    Pararhilo.stop(hilo)
+    for i in lista:
+        del i
+''' hilo = threading.current_thread()
+    delete(filename)
+    #Pararhilo.stop(hilo)'''
 
-botpausar.config(command=parar1)
-
+botpausar.config(command= parar1)
 
 
 ventana.mainloop()
