@@ -15,10 +15,9 @@ class Filosofo(threading.Thread):
     estado = []
 
     num = 0
-    def __init__(self, tiempo, comer1):
+    def __init__(self, tiempo):
         super().__init__()
         self.tiempo = tiempo
-        self.comer1 = comer1
         #atributos del problema
         self.id = Filosofo.num
         Filosofo.num +=1
@@ -26,7 +25,7 @@ class Filosofo(threading.Thread):
         Filosofo.estado.append('pensando')
         
         Filosofo.palillos.append(threading.Semaphore(0)) #establece el semaforo del palillo de la izquierda
-        
+        scrol.insert(INSERT,f'Filósofo {self.id} está {Filosofo.estado[self.id]} \n')
         print(f'Filósofo {self.id} está {Filosofo.estado[self.id]}')
         
    
@@ -111,7 +110,8 @@ class Filosofo(threading.Thread):
         n = self.control(uno, dos, tres, cuatro, cinco)
         n.config(bg='light blue')
     
-    
+    def stop(self):
+        return self._stop.set()
     
     def run(self):
         #for i in range(self.tiempo):
@@ -144,9 +144,24 @@ def boton( f, c, palabra, vent):
     a = ttk.Button(vent, text=palabra)
     a.grid(row=f, column=c)
     return a
+
+
+def empezar():
+    botiniciar.config(state='disable')
+    for i in range (numfilosfos):
+        lista.append(Filosofo(tiempo))
+
+    for i in lista:
+        #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
+        i.start()
+    for i in lista:
+        i.join()
     
+
+
 #Gráfica
 ventana = Tk() 
+ventana.title('La Cena de los Filósofos')
 cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
 cena.grid(column=1, row=1, padx=5, pady=5, sticky= 'w')
 
@@ -181,14 +196,10 @@ pl=texto_grid(10, 11, 'Palillo libre', None, cena)
 
 
 #Programa
-comer = []
 numfilosfos = 5
 tiempo = 3
 #primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
 lista = []
-
-for i in range (numfilosfos):
-    lista.append(Filosofo(tiempo, comer))
 
 
 #caja Log
@@ -212,9 +223,8 @@ e2 = entry(500, 60, l)
 e3 = entry(500, 90, l)
 e4 = entry(500, 120, l)
 e5 = entry(500, 150, l)
-for i in lista:
-    #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
-    i.start()
+
+
   
     
 #caja controles
@@ -235,6 +245,18 @@ def cerrar_ventana():
     ventana.destroy()
 
 botsalir.config(command=cerrar_ventana)
+botiniciar.config(command=empezar)
+
+def parar():
+    
+    for i in lista:
+        if i.isAlive():
+            time.sleep(5)
+            #i.terminate()
+   
+
+#botpausar.config(command=parar)
+
 
 
 ventana.mainloop()
