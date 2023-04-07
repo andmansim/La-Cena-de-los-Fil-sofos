@@ -76,9 +76,10 @@ for i in lista:
     #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
     i.start()
 
+
 for a in lista:
     a.join()
-    print(a.id, a.vez_comer)
+    
 
 for b in lista:
     print(b.id, b.vez_comer)
