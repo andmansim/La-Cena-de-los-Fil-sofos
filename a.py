@@ -143,11 +143,11 @@ cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
 cena.grid(column=1, row=1, padx=5, pady=5, sticky= 'w')
 
 #Filósofos
-filo1 = texto_grid(4, 4, 'Filósofo 1', 'pink', cena)
-filo5 = texto_grid(6, 2, 'Filósofo 5', 'orange', cena)
-filo3 = texto_grid(8, 3, 'Filósofo 3', 'orange', cena)
+filo1 = texto_grid(4, 4, 'Filósofo 1', 'white', cena)
+filo5 = texto_grid(6, 2, 'Filósofo 5', 'white', cena)
+filo3 = texto_grid(8, 3, 'Filósofo 3', 'white', cena)
 filo2 = texto_grid(6, 7, 'Filósofo 2', 'white', cena)
-filo4 = texto_grid(8, 5, 'Filósofo 4', 'pink', cena)
+filo4 = texto_grid(8, 5, 'Filósofo 4', 'white', cena)
 #números
 uno = texto_grid(4, 3, '1', 'blue', cena)
 dos = texto_grid(5, 5, '2', 'gray', cena)
@@ -218,13 +218,16 @@ crear_log= Checkbutton(c, text= 'Crear un log', variable= IntVar())
 crear_log.grid(column=0, row=2, padx=5, pady=5, sticky= 'w')
 
 botsalir = boton(1, 5, 'Salir', c)
+
 botcreditos = boton(2, 5, 'Créditos', c)
 botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
+def cerrar_ventana():
+    ventana.destroy()
 
+botsalir.config(command=cerrar_ventana)
 
-#ventana.after(2000,  )
 
 ventana.mainloop()
 
