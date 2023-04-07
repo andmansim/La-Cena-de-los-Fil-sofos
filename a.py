@@ -64,7 +64,8 @@ class Filosofo(threading.Thread):
         n = self.control(uno, dos, tres, cuatro, cinco)
         n.config(bg='blue')
         
-        
+    def parar(self):
+        del self    
     
     def verificar(self, a):
         if a == 5:
@@ -157,7 +158,8 @@ def empezar():
     for i in lista:
         i.join()
     
-
+def cerrar_ventana():
+    ventana.destroy()
 
 #Gráfica
 ventana = Tk() 
@@ -225,8 +227,6 @@ e4 = entry(500, 120, l)
 e5 = entry(500, 150, l)
 
 
-  
-    
 #caja controles
 
 c= ttk.LabelFrame(ventana, text='Controles')
@@ -241,21 +241,19 @@ botcreditos = boton(2, 5, 'Créditos', c)
 botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
-def cerrar_ventana():
-    ventana.destroy()
 
 botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
 
-def parar():
-    
-    for i in lista:
+def parar1():
+    Filosofo.parar
+    '''for i in lista:
         if i.isAlive():
             time.sleep(5)
-            #i.terminate()
+            #i.terminate()'''
    
 
-#botpausar.config(command=parar)
+botpausar.config(command=parar1)
 
 
 
