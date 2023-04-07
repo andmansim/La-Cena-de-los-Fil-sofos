@@ -74,26 +74,24 @@ class Filosofo(threading.Thread):
         
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
-            e= self.control(e1, e2, e3, e4, e5)
-            e.delete(0, 'end')
-            self.vez_comer+=1
-            e.insert(0, self.vez_comer)
-            f = self.control(filo1, filo2, filo3, filo4, filo5)
-            f.config(bg='orange')
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
-            n = self.control(uno, dos, tres, cuatro, cinco)
-            n.config(bg='gray')
+            
             
         
     def comer(self):
         print(f'Filosofo {self.id} está {Filosofo.estado[self.id]} \t')
         scrol.insert(INSERT,f'Filosofo {self.id} está {Filosofo.estado[self.id]} \n')
+        f = self.control(filo1, filo2, filo3, filo4, filo5)
+        f.config(bg='orange')
+        e= self.control(e1, e2, e3, e4, e5)
+        e.delete(0, 'end')
+        self.vez_comer+=1
+        e.insert(0, self.vez_comer)
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
         f = self.control(filo1, filo2, filo3, filo4, filo5)
         f.config(bg='white')
-        
-        
+    
         scrol.insert(INSERT,f'Filosofo {self.id} ha terminado de comer \n')
         
 
