@@ -77,6 +77,8 @@ class Filosofo(threading.Thread):
         scrol.insert(INSERT,f'Filosofo {self.id} está {Filosofo.estado[self.id]} \n')
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
+        f = self.control()
+        f.config(bg='white')
         
         if self.id == 0:
             e = e1
@@ -97,8 +99,7 @@ class Filosofo(threading.Thread):
     def liberar(self):
         Filosofo.semaforo.acquire()
         Filosofo.estado[self.id] = 'pensando'
-        f = self.control()
-        f.config(bg='white')
+        
         self.verificar(self.id -1)
         self.verificar(self.id +1)
         Filosofo.semaforo.release()
