@@ -30,17 +30,17 @@ class Filosofo(threading.Thread):
         print(f'Filósofo {self.id} está {Filosofo.estado[self.id]}')
         
    
-    def control(self):
+    def control(self, d1, d2, d3, d4, d5):
         if self.id == 0:
-            f = filo1
+            f = d1
         elif self.id == 1:
-            f = filo2
+            f = d2
         elif self.id == 2:
-            f = filo3
+            f = d3
         elif self.id == 3:
-            f = filo4 
+            f = d4
         elif self.id == 4:
-            f = filo5 
+            f = d5
         return f 
         
     
@@ -51,12 +51,18 @@ class Filosofo(threading.Thread):
     
     def hambre(self):
         Filosofo.semaforo.acquire() #señala que tomará los palillos exclusión mutua
+        n = self.control(uno, dos, tres, cuatro, cinco)
+        n.config(bg='light blue')
+            
         Filosofo.estado[self.id] = 'hambriento'
-        f = self.control()
+        f = self.control(filo1, filo2, filo3, filo4, filo5)
         f.config(bg='pink')
         self.verificar(self.id) #Si no puede comer no se bloquea
         Filosofo.semaforo.release() #deja de señala que va a tomar los palillos
         Filosofo.palillos[self.id].acquire() #coge los palillos
+        n = self.control(uno, dos, tres, cuatro, cinco)
+        n.config(bg='blue')
+        
         
     
     def verificar(self, a):
@@ -68,28 +74,22 @@ class Filosofo(threading.Thread):
         
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
-            f = self.control()
+            f = self.control(filo1, filo2, filo3, filo4, filo5)
             f.config(bg='orange')
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
+            n = self.control(uno, dos, tres, cuatro, cinco)
+            n.config(bg='gray')
+            
         
     def comer(self):
         print(f'Filosofo {self.id} está {Filosofo.estado[self.id]} \t')
         scrol.insert(INSERT,f'Filosofo {self.id} está {Filosofo.estado[self.id]} \n')
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
-        f = self.control()
+        f = self.control(filo1, filo2, filo3, filo4, filo5)
         f.config(bg='white')
         
-        if self.id == 0:
-            e = e1
-        elif self.id == 1:
-            e = e2
-        elif self.id == 2:
-            e = e3
-        elif self.id == 3:
-            e = e4
-        elif self.id == 4:
-            e = e5
+        e= self.control(e1, e2, e3, e4, e5)
         e.delete(0, 'end')
         self.vez_comer+=1
         e.insert(0, self.vez_comer)
@@ -98,11 +98,15 @@ class Filosofo(threading.Thread):
 
     def liberar(self):
         Filosofo.semaforo.acquire()
+        n = self.control(uno, dos, tres, cuatro, cinco)
+        n.config(bg='light blue')
         Filosofo.estado[self.id] = 'pensando'
         
         self.verificar(self.id -1)
         self.verificar(self.id +1)
         Filosofo.semaforo.release()
+        n = self.control(uno, dos, tres, cuatro, cinco)
+        n.config(bg='gray')
     
     
     
