@@ -4,7 +4,7 @@ from tkinter import scrolledtext as st
 import random
 import threading
 import time
-import concurrent.futures as cf
+
 
 
 
@@ -13,8 +13,8 @@ class Filosofo(threading.Thread):
     semaforo = threading.Lock()
     palillos= []
     estado = []
-
     num = 0
+    
     def __init__(self, tiempo):
         super().__init__()
         self.tiempo = tiempo
@@ -63,9 +63,7 @@ class Filosofo(threading.Thread):
         Filosofo.palillos[self.id].acquire() #coge los palillos
         n = self.control(uno, dos, tres, cuatro, cinco)
         n.config(bg='blue')
-        
-    def parar(self):
-        del self    
+  
     
     def verificar(self, a):
         if a == 5:
@@ -111,8 +109,6 @@ class Filosofo(threading.Thread):
         n = self.control(uno, dos, tres, cuatro, cinco)
         n.config(bg='light blue')
     
-    def stop(self):
-        return self._stop.set()
     
     def run(self):
         #for i in range(self.tiempo):
@@ -123,7 +119,14 @@ class Filosofo(threading.Thread):
             self.liberar()
             
             
-
+class Pararhilo(threading.Thread):
+    def __init__(self):
+        super(Pararhilo, self).__init__()
+        self._stop_event= threading.Event()
+    def stop(self):
+        self._stop_event.set()
+    def stopped(self):
+        return self._stop_event.is_set()
 
 def texto_grid( f, c, palabra, color, vent) :
     a = Label(vent, text = palabra, bg= color)
@@ -149,6 +152,7 @@ def boton( f, c, palabra, vent):
 
 def empezar():
     botiniciar.config(state='disable')
+    
     for i in range (numfilosfos):
         lista.append(Filosofo(tiempo))
 
@@ -208,10 +212,10 @@ lista = []
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
 scrol = st.ScrolledText(l, width= 50, height = 10)
-
 scrol.grid(column=0, row=1, padx=5, pady=5)
 b = ttk.Label(l, text='Cuántas veces han comido:')
 b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
+
 f1 = texto_place(440, 30, 'Filósofo 1', l)
 f2= texto_place(440, 60, 'Filósofo 2', l)
 f3= texto_place(440, 90, 'Filósofo 3', l)
@@ -219,8 +223,6 @@ f4= texto_place(440, 120, 'Filósofo 4', l)
 f5= texto_place(440, 150, 'Filósofo 5', l)
 
 e1 = entry(500, 30, l)
-#e1.after(1000, e1.insert(0, f'{lista[0].vez_comer}'))
-
 e2 = entry(500, 60, l)
 e3 = entry(500, 90, l)
 e4 = entry(500, 120, l)
@@ -246,12 +248,8 @@ botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
 
 def parar1():
-    Filosofo.parar
-    '''for i in lista:
-        if i.isAlive():
-            time.sleep(5)
-            #i.terminate()'''
-   
+    hilo = threading.current_thread()
+    Pararhilo.stop(hilo)
 
 botpausar.config(command=parar1)
 
