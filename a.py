@@ -57,11 +57,15 @@ class Filosofo(threading.Thread):
         
     def comer(self):
         print(f'Filosofo {self.id} está {Filosofo.estado[self.id]} \t')
+        scrol.insert(INSERT,f'Filosofo {self.id} está {Filosofo.estado[self.id]} \n')
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
         self.vez_comer+=1
+        scrol.insert(INSERT,f'Filosofo {self.id} ha terminado de comer \n')
         self.comer1.append((self.id, self.vez_comer))
-        return 0
+        
+      
+        
         
         
       
@@ -78,11 +82,10 @@ class Filosofo(threading.Thread):
     def run(self):
         #for i in range(self.tiempo):
             
-            '''self.pensar()
-            self.hambre()'''
-            b = self.comer()
-            #self.liberar()
-            return b
+            self.pensar()
+            self.hambre()
+            self.comer()
+            self.liberar()
             
             
 
@@ -93,6 +96,8 @@ def texto_grid( f, c, palabra, color, vent) :
 def texto_place( f, c, palabra, vent):
     ttk.Label(vent, text = palabra).place(x=f, y=c)
 
+async def datos(dato):
+    return dato
     
 def entry( f, c, vent) :
     a = ttk.Entry(vent)
@@ -151,7 +156,9 @@ for i in range (numfilosfos):
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
-scrol = st.ScrolledText(l, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
+scrol = st.ScrolledText(l, width= 50, height = 10)
+
+scrol.grid(column=0, row=1, padx=5, pady=5)
 b = ttk.Label(l, text='Cuántas veces han comido:')
 b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
 f1 = texto_place(440, 30, 'Filósofo 1', l)
@@ -161,20 +168,16 @@ f4= texto_place(440, 120, 'Filósofo 4', l)
 f5= texto_place(440, 150, 'Filósofo 5', l)
 
 e1 = entry(500, 30, l)
-e1.after(1000, e1.insert(0, f'{lista[0].vez_comer}'))
+#e1.after(1000, e1.insert(0, f'{lista[0].vez_comer}'))
 
 e2 = entry(500, 60, l)
 e3 = entry(500, 90, l)
 e4 = entry(500, 120, l)
 e5 = entry(500, 150, l)
 for i in lista:
-    with cf.ThreadPoolExecutor() as executor:
-        future = executor.submit(i.start())
-        ret = future.result()
     #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
-        print(ret)
-    #i.start()
-   # e1.insert(0, f'{lista[0].vez_comer}')
+    i.start()
+  
     
 #caja controles
 
