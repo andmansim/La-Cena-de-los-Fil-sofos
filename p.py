@@ -60,7 +60,7 @@ def block2(l, dato, dato1, dato2, dato3, dato4):
     f5= texto_place(440, 150, 'Filósofo 5', l)
 
     e1 = entry(500, 30, l)
-    e1.insert(0, dato)
+    #e1.insert(0, dato)
     e2 = entry(500, 60, l)
     e3 = entry(500, 90, l)
     e4 = entry(500, 120, l)

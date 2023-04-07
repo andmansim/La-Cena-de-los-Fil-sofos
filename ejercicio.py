@@ -52,6 +52,8 @@ class Filosofo(threading.Thread):
         print(f'Filosofo {self.id} ha terminado de comer \t')
         self.vez_comer+=1
     
+        a = self.vez_comer
+        p.e1.set(a)
 
     def liberar(self):
         Filosofo.semaforo.acquire()
@@ -59,7 +61,8 @@ class Filosofo(threading.Thread):
         self.verificar(self.id -1)
         self.verificar(self.id +1)
         Filosofo.semaforo.release()
-        
+    
+    
     
     def run(self):
         for i in range(self.tiempo):
