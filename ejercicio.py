@@ -9,9 +9,9 @@ class Filosofo(threading.Thread):
     estado = []
 
     num = 0
-    def __init__(self):
+    def __init__(self, tiempo):
         super().__init__()
-        
+        self.tiempo = tiempo
         #atributos del problema
         self.id = Filosofo.num
         Filosofo.num +=1
@@ -62,27 +62,10 @@ class Filosofo(threading.Thread):
         
     
     def run(self):
-        for i in range(tiempo):
+        for i in range(self.tiempo):
             self.pensar()
             self.hambre()
             self.comer()
             self.liberar()
         
 
-numfilosfos = 5
-tiempo = 3
-#primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
-lista = []
-for i in range (numfilosfos):
-    lista.append(Filosofo())
-for i in lista:
-    #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
-    i.start()
-
-
-for a in lista:
-    a.join()
-    
-
-for b in lista:
-    print(b.id, b.vez_comer)

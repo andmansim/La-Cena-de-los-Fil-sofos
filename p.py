@@ -1,14 +1,7 @@
 from tkinter import*
 from tkinter import ttk
 from tkinter import scrolledtext as st
-from urllib.parse import*
-from contextlib import closing
-from sys import*
-from os import sep
-from timeit import *
-import asyncio
-from functools import partial
-import html.parser
+
 
 
 def texto_grid( f, c, palabra, color, vent) :
@@ -28,7 +21,7 @@ def entry( f, c, vent) :
 def boton( f, c, palabra, vent):
     ttk.Button(vent, text=palabra).grid(row=f, column=c)
     
-def block1():
+def block1(cena):
     filo0 = texto_grid(4, 4, 'Filósofo 1', 'pink', cena)
     filo5 = texto_grid(6, 2, 'Filósofo 5', 'orange', cena)
     filo3 = texto_grid(8, 3, 'Filósofo 3', 'orange', cena)
@@ -56,7 +49,7 @@ def block1():
     gris = texto_grid(10, 10, None,'gray', cena)
     pl=texto_grid(10, 11, 'Palillo libre', None, cena)
 
-def block2():
+def block2(l, dato, dato1, dato2, dato3, dato4):
     st.ScrolledText(l, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
     b = ttk.Label(l, text='Cuántas veces han comido:')
     b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
@@ -67,12 +60,13 @@ def block2():
     f5= texto_place(440, 150, 'Filósofo 5', l)
 
     e1 = entry(500, 30, l)
+    e1.insert(0, dato)
     e2 = entry(500, 60, l)
     e3 = entry(500, 90, l)
     e4 = entry(500, 120, l)
     e5 = entry(500, 150, l)
-    return e1, e2, e3, e4, e5
-def block3():
+    
+def block3(c):
     crear_log= Checkbutton(c, text= 'Crear un log', variable= IntVar())
     crear_log.grid(column=0, row=2, padx=5, pady=5, sticky= 'w')
 
@@ -82,20 +76,6 @@ def block3():
     botiniciar= boton(2, 2, 'Iniciar', c)
     botresert = boton(2, 4,'Resert', c)
 
-
-ventana = Tk() 
-
-
-cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
-cena.grid(column=1, row=1, padx=5, pady=5, sticky= 'w')
-block1()
-l= ttk.LabelFrame(ventana, text='Log')
-l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
-block2()
-c= ttk.LabelFrame(ventana, text='Controles')
-c.grid(column=1, row=14, padx=5, pady=5, sticky= 'w')
-block3()
-ventana.mainloop()
 
 '''
 Falta pponer eltexto en las cajas de la Gui + botones
