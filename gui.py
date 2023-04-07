@@ -82,9 +82,7 @@ botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
 
-'''for b in ej.lista:
-    e1.insert(0, f'{ej.b.vez_comer}')
-'''
+
 ventana.mainloop()
 
 '''
