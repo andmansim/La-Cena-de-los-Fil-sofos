@@ -128,6 +128,17 @@ po=texto_grid(9, 11, 'Palillo ocupado', None, cena)
 gris = texto_grid(10, 10, None,'gray', cena)
 pl=texto_grid(10, 11, 'Palillo libre', None, cena)
 
+
+
+#Programa
+
+numfilosfos = 5
+tiempo = 3
+#primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
+lista = []
+g = Filosofo(tiempo)
+
+
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
@@ -141,7 +152,7 @@ f4= texto_place(440, 120, 'Filósofo 4', l)
 f5= texto_place(440, 150, 'Filósofo 5', l)
 
 e1 = entry(500, 30, l)
-e1.set(Filosofo.vez_comer)
+e1.insert(0, f'{g.vez_comer}')
 e2 = entry(500, 60, l)
 e1 = entry(500, 90, l)
 e1 = entry(500, 120, l)
@@ -164,14 +175,8 @@ botresert = boton(2, 4,'Resert', c)
 
 ventana.mainloop()
 
-#Programa
-
-numfilosfos = 5
-tiempo = 3
-#primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
-lista = []
 for i in range (numfilosfos):
-    lista.append(Filosofo(tiempo))
+    lista.append(g)
 for i in lista:
     #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
     i.start()
