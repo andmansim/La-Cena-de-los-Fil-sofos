@@ -52,13 +52,15 @@ class Filosofo(threading.Thread):
     def hambre(self):
         Filosofo.semaforo.acquire() #señala que tomará los palillos exclusión mutua
         n = self.control(uno, dos, tres, cuatro, cinco)
-        n.config(bg='light blue')
+        n.config(bg='gray')
             
         Filosofo.estado[self.id] = 'hambriento'
         f = self.control(filo1, filo2, filo3, filo4, filo5)
         f.config(bg='pink')
         self.verificar(self.id) #Si no puede comer no se bloquea
         Filosofo.semaforo.release() #deja de señala que va a tomar los palillos
+        n = self.control(uno, dos, tres, cuatro, cinco)
+        n.config(bg='light blue')
         Filosofo.palillos[self.id].acquire() #coge los palillos
         n = self.control(uno, dos, tres, cuatro, cinco)
         n.config(bg='blue')
@@ -75,6 +77,8 @@ class Filosofo(threading.Thread):
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
+            n = self.control(uno, dos, tres, cuatro, cinco)
+            n.config(bg='blue')
             
             
         
@@ -98,14 +102,14 @@ class Filosofo(threading.Thread):
     def liberar(self):
         Filosofo.semaforo.acquire()
         n = self.control(uno, dos, tres, cuatro, cinco)
-        n.config(bg='light blue')
+        n.config(bg='gray')
         Filosofo.estado[self.id] = 'pensando'
         
         self.verificar(self.id -1)
         self.verificar(self.id +1)
         Filosofo.semaforo.release()
         n = self.control(uno, dos, tres, cuatro, cinco)
-        n.config(bg='gray')
+        n.config(bg='light blue')
     
     
     
