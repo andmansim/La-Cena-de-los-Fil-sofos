@@ -85,6 +85,7 @@ for i in range (numfilosfos):
 for i in lista:
     #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
     i.start()
+    print(i.estado)
     
 for a in lista:
     a.join()

@@ -4,7 +4,7 @@ from tkinter import scrolledtext as st
 import random
 import threading
 import time
-
+import concurrent.futures as cf
 
 
 
@@ -13,7 +13,7 @@ class Filosofo(threading.Thread):
     semaforo = threading.Lock()
     palillos= []
     estado = []
-
+    patata = []
     num = 0
     def __init__(self, tiempo, comer1):
         super().__init__()
@@ -23,8 +23,10 @@ class Filosofo(threading.Thread):
         self.id = Filosofo.num
         Filosofo.num +=1
         self.vez_comer = 0
+        
         Filosofo.estado.append('pensando')
         Filosofo.palillos.append(threading.Semaphore(0)) #establece el semaforo del palillo de la izquierda
+        
         print(f'Filósofo {self.id} está {Filosofo.estado[self.id]}')
         
    
@@ -59,6 +61,7 @@ class Filosofo(threading.Thread):
         print(f'Filosofo {self.id} ha terminado de comer \t')
         self.vez_comer+=1
         self.comer1.append((self.id, self.vez_comer))
+        return 0
         
         
       
@@ -73,12 +76,13 @@ class Filosofo(threading.Thread):
     
     
     def run(self):
-        for i in range(self.tiempo):
+        #for i in range(self.tiempo):
             
-            self.pensar()
-            self.hambre()
-            self.comer()
-            self.liberar()
+            '''self.pensar()
+            self.hambre()'''
+            b = self.comer()
+            #self.liberar()
+            return b
             
             
 
@@ -89,8 +93,6 @@ def texto_grid( f, c, palabra, color, vent) :
 def texto_place( f, c, palabra, vent):
     ttk.Label(vent, text = palabra).place(x=f, y=c)
 
-async def datos(dato):
-    return dato
     
 def entry( f, c, vent) :
     a = ttk.Entry(vent)
@@ -145,14 +147,11 @@ lista = []
 for i in range (numfilosfos):
     lista.append(Filosofo(tiempo, comer))
 
-for i in lista:
-    #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
-    i.start()
-    
+
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
-st.ScrolledText(l, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
+scrol = st.ScrolledText(l, width= 50, height = 10).grid(column=0, row=1, padx=5, pady=5)
 b = ttk.Label(l, text='Cuántas veces han comido:')
 b.grid(column=2, row=0, padx= 3, pady=3, sticky='e')
 f1 = texto_place(440, 30, 'Filósofo 1', l)
@@ -162,11 +161,21 @@ f4= texto_place(440, 120, 'Filósofo 4', l)
 f5= texto_place(440, 150, 'Filósofo 5', l)
 
 e1 = entry(500, 30, l)
-e2 = entry(500, 60, l)
-e1 = entry(500, 90, l)
-e1 = entry(500, 120, l)
-e1 = entry(500, 150, l)
+e1.after(1000, e1.insert(0, f'{lista[0].vez_comer}'))
 
+e2 = entry(500, 60, l)
+e3 = entry(500, 90, l)
+e4 = entry(500, 120, l)
+e5 = entry(500, 150, l)
+for i in lista:
+    with cf.ThreadPoolExecutor() as executor:
+        future = executor.submit(i.start())
+        ret = future.result()
+    #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
+        print(ret)
+    #i.start()
+   # e1.insert(0, f'{lista[0].vez_comer}')
+    
 #caja controles
 
 c= ttk.LabelFrame(ventana, text='Controles')
