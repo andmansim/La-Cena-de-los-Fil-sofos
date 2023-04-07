@@ -74,7 +74,7 @@ class Filosofo(threading.Thread):
         print(f'Filosofo {self.id} ha terminado de comer \t')
         self.vez_comer+=1
     
-        a = self.vez_comer
+        
       
 
     def liberar(self):
@@ -88,10 +88,13 @@ class Filosofo(threading.Thread):
     
     def run(self):
         for i in range(self.tiempo):
+            a = self.vez_comer
             self.pensar()
             self.hambre()
             self.comer()
             self.liberar()
+            a = self.vez_comer
+            return a
 
 
 
@@ -136,8 +139,14 @@ numfilosfos = 5
 tiempo = 3
 #primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
 lista = []
-g = Filosofo(tiempo)
 
+for i in range (numfilosfos):
+    lista.append(Filosofo(tiempo))
+
+for i in lista:
+    #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
+    h = i.start()
+    print(h)
 
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
@@ -152,7 +161,6 @@ f4= texto_place(440, 120, 'Filósofo 4', l)
 f5= texto_place(440, 150, 'Filósofo 5', l)
 
 e1 = entry(500, 30, l)
-e1.insert(0, f'{g.vez_comer}')
 e2 = entry(500, 60, l)
 e1 = entry(500, 90, l)
 e1 = entry(500, 120, l)
@@ -172,21 +180,21 @@ botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
 
+#ventana.after(2000,  )
 
 ventana.mainloop()
 
-for i in range (numfilosfos):
-    lista.append(g)
-for i in lista:
+
+'''for i in lista:
     #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
     i.start()
-
-
+'''
+'''
 for a in lista:
     a.join()
     
 for b in lista:
     print(b.id, b.vez_comer)
-
+'''
 
 
