@@ -1,7 +1,7 @@
 from tkinter import*
 from tkinter import ttk
 from tkinter import scrolledtext as st
-import ejercicio as ej
+
 
 def texto_grid(f, c, palabra, color, vent) :
     Label(vent, text = palabra, bg= color).grid(row=f, column=c)
