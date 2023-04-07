@@ -7,22 +7,6 @@ import time
 
 
 
-def texto_grid(f, c, palabra, color, vent) :
-    Label(vent, text = palabra, bg= color).grid(row=f, column=c)
-
-def texto_place(f, c, palabra, vent):
-    ttk.Label(vent, text = palabra).place(x=f, y=c)
-
-
-def entry(f, c, vent) :
-    a = ttk.Entry(vent)
-    a.place(x = f, y = c)
-    return a
-#textvariable=tipo,
-def boton(f, c, palabra, vent):
-    ttk.Button(vent, text=palabra).grid(row=f, column=c)
-
-
 
 
 class Filosofo(threading.Thread):
@@ -31,9 +15,10 @@ class Filosofo(threading.Thread):
     estado = []
 
     num = 0
-    def __init__(self, tiempo):
+    def __init__(self, tiempo, comer1):
         super().__init__()
         self.tiempo = tiempo
+        self.comer1 = comer1
         #atributos del problema
         self.id = Filosofo.num
         Filosofo.num +=1
@@ -73,7 +58,8 @@ class Filosofo(threading.Thread):
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
         self.vez_comer+=1
-    
+        self.comer1.append((self.id, self.vez_comer))
+        
         
       
 
@@ -88,13 +74,34 @@ class Filosofo(threading.Thread):
     
     def run(self):
         for i in range(self.tiempo):
-            a = self.vez_comer
+            
             self.pensar()
             self.hambre()
             self.comer()
             self.liberar()
-            a = self.vez_comer
-            return a
+            
+            
+class Gui(threading.Thread):
+    def __init__(self):
+        super().__init__()
+        self.ventana = Tk()
+    
+    def run (self):
+        
+def texto_grid(f, c, palabra, color, vent) :
+    Label(vent, text = palabra, bg= color).grid(row=f, column=c)
+
+def texto_place(f, c, palabra, vent):
+    ttk.Label(vent, text = palabra).place(x=f, y=c)
+
+
+def entry(f, c, vent) :
+    a = ttk.Entry(vent)
+    a.place(x = f, y = c)
+    return a
+#textvariable=tipo,
+def boton(f, c, palabra, vent):
+    ttk.Button(vent, text=palabra).grid(row=f, column=c)
 
 
 
@@ -134,20 +141,19 @@ pl=texto_grid(10, 11, 'Palillo libre', None, cena)
 
 
 #Programa
-
+comer = []
 numfilosfos = 5
 tiempo = 3
 #primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
 lista = []
 
 for i in range (numfilosfos):
-    lista.append(Filosofo(tiempo))
+    lista.append(Filosofo(tiempo, comer))
 
 for i in lista:
     #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
-    h = i.start()
-    print(h)
-
+    i.start()
+    
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
