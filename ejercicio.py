@@ -1,6 +1,7 @@
 import random
 import threading
 import time
+import p
 
 class Filosofo(threading.Thread):
     semaforo = threading.Lock()
@@ -18,6 +19,7 @@ class Filosofo(threading.Thread):
         Filosofo.estado.append('pensando')
         Filosofo.palillos.append(threading.Semaphore(0)) #establece el semaforo del palillo de la izquierda
         print(f'Filósofo {self.id} está {Filosofo.estado[self.id]}')
+        
    
    
     def pensar(self): 
@@ -49,6 +51,7 @@ class Filosofo(threading.Thread):
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
         self.vez_comer+=1
+    
 
     def liberar(self):
         Filosofo.semaforo.acquire()

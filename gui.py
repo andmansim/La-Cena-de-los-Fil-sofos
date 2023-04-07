@@ -2,12 +2,12 @@ from tkinter import*
 from tkinter import ttk
 from tkinter import scrolledtext as st
 
-
 def texto_grid(f, c, palabra, color, vent) :
     Label(vent, text = palabra, bg= color).grid(row=f, column=c)
 
 def texto_place(f, c, palabra, vent):
     ttk.Label(vent, text = palabra).place(x=f, y=c)
+
 
 def entry(f, c, vent) :
     a = ttk.Entry(vent)

@@ -1,7 +1,14 @@
 from tkinter import*
 from tkinter import ttk
 from tkinter import scrolledtext as st
-
+from urllib.parse import*
+from contextlib import closing
+from sys import*
+from os import sep
+from timeit import *
+import asyncio
+from functools import partial
+import html.parser
 
 
 def texto_grid( f, c, palabra, color, vent) :
@@ -10,10 +17,13 @@ def texto_grid( f, c, palabra, color, vent) :
 def texto_place( f, c, palabra, vent):
     ttk.Label(vent, text = palabra).place(x=f, y=c)
 
+async def datos(dato):
+    return dato
+    
 def entry( f, c, vent) :
     a = ttk.Entry(vent)
     a.place(x = f, y = c)
-    a.insert(0,'aaaa')
+    return a
 #textvariable=tipo,
 def boton( f, c, palabra, vent):
     ttk.Button(vent, text=palabra).grid(row=f, column=c)
@@ -58,10 +68,10 @@ def block2():
 
     e1 = entry(500, 30, l)
     e2 = entry(500, 60, l)
-    e1 = entry(500, 90, l)
-    e1 = entry(500, 120, l)
-    e1 = entry(500, 150, l)
-    
+    e3 = entry(500, 90, l)
+    e4 = entry(500, 120, l)
+    e5 = entry(500, 150, l)
+    return e1, e2, e3, e4, e5
 def block3():
     crear_log= Checkbutton(c, text= 'Crear un log', variable= IntVar())
     crear_log.grid(column=0, row=2, padx=5, pady=5, sticky= 'w')
