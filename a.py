@@ -81,30 +81,25 @@ class Filosofo(threading.Thread):
             self.liberar()
             
             
-class Gui(threading.Thread):
-    def __init__(self):
-        super().__init__()
-        self.ventana = Tk()
-    
-    def run (self):
-        
-def texto_grid(f, c, palabra, color, vent) :
+
+
+def texto_grid( f, c, palabra, color, vent) :
     Label(vent, text = palabra, bg= color).grid(row=f, column=c)
 
-def texto_place(f, c, palabra, vent):
+def texto_place( f, c, palabra, vent):
     ttk.Label(vent, text = palabra).place(x=f, y=c)
 
-
-def entry(f, c, vent) :
+async def datos(dato):
+    return dato
+    
+def entry( f, c, vent) :
     a = ttk.Entry(vent)
     a.place(x = f, y = c)
     return a
 #textvariable=tipo,
-def boton(f, c, palabra, vent):
+def boton( f, c, palabra, vent):
     ttk.Button(vent, text=palabra).grid(row=f, column=c)
-
-
-
+    
 #Gráfica
 ventana = Tk() 
 cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
