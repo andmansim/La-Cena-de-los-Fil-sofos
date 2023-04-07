@@ -61,8 +61,20 @@ class Filosofo(threading.Thread):
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
         self.vez_comer+=1
+        if self.id == 0:
+            e = e1
+        elif self.id == 1:
+            e = e2
+        elif self.id == 2:
+            e = e3
+        elif self.id == 3:
+            e = e4
+        elif self.id == 4:
+            e = e5
+        e.delete(0, 'end')
+        e.insert(0, self.vez_comer)
         scrol.insert(INSERT,f'Filosofo {self.id} ha terminado de comer \n')
-        self.comer1.append((self.id, self.vez_comer))
+        
         
       
         
