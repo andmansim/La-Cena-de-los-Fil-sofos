@@ -78,6 +78,7 @@ for i in lista:
 
 for a in lista:
     a.join()
+    print(a.id, a.vez_comer)
 
 for b in lista:
     print(b.id, b.vez_comer)

@@ -9,9 +9,11 @@ def texto_grid(f, c, palabra, color, vent) :
 def texto_place(f, c, palabra, vent):
     ttk.Label(vent, text = palabra).place(x=f, y=c)
 
-def entry(f, c, tipo, vent) :
-    ttk.Entry(vent, textvariable=tipo).place(x = f, y = c)
-
+def entry(f, c, vent) :
+    a = ttk.Entry(vent)
+    a.place(x = f, y = c)
+    a.insert(0,'aaaa')
+#textvariable=tipo,
 def boton(f, c, palabra, vent):
     ttk.Button(vent, text=palabra).grid(row=f, column=c)
 
@@ -60,11 +62,11 @@ f3= texto_place(440, 90, 'Filósofo 3', l)
 f4= texto_place(440, 120, 'Filósofo 4', l)
 f5= texto_place(440, 150, 'Filósofo 5', l)
 
-e1 = entry(500, 30, StringVar(), l)
-e2 = entry(500, 60, StringVar(), l)
-e1 = entry(500, 90, StringVar(), l)
-e1 = entry(500, 120, StringVar(), l)
-e1 = entry(500, 150, StringVar(), l)
+e1 = entry(500, 30, l)
+e2 = entry(500, 60, l)
+e1 = entry(500, 90, l)
+e1 = entry(500, 120, l)
+e1 = entry(500, 150, l)
 
 #caja controles
 
@@ -80,9 +82,9 @@ botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
 
-for b in ej.lista:
+'''for b in ej.lista:
     e1.insert(0, f'{ej.b.vez_comer}')
-
+'''
 ventana.mainloop()
 
 '''
