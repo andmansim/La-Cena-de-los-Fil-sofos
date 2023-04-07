@@ -74,6 +74,10 @@ class Filosofo(threading.Thread):
         
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
+            e= self.control(e1, e2, e3, e4, e5)
+            e.delete(0, 'end')
+            self.vez_comer+=1
+            e.insert(0, self.vez_comer)
             f = self.control(filo1, filo2, filo3, filo4, filo5)
             f.config(bg='orange')
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
@@ -89,10 +93,7 @@ class Filosofo(threading.Thread):
         f = self.control(filo1, filo2, filo3, filo4, filo5)
         f.config(bg='white')
         
-        e= self.control(e1, e2, e3, e4, e5)
-        e.delete(0, 'end')
-        self.vez_comer+=1
-        e.insert(0, self.vez_comer)
+        
         scrol.insert(INSERT,f'Filosofo {self.id} ha terminado de comer \n')
         
 
@@ -154,11 +155,11 @@ filo3 = texto_grid(8, 3, 'Filósofo 3', 'white', cena)
 filo2 = texto_grid(6, 7, 'Filósofo 2', 'white', cena)
 filo4 = texto_grid(8, 5, 'Filósofo 4', 'white', cena)
 #números
-uno = texto_grid(4, 3, '1', 'blue', cena)
+uno = texto_grid(4, 3, '1', 'gray', cena)
 dos = texto_grid(5, 5, '2', 'gray', cena)
-tres = texto_grid(7, 6, '3', 'blue', cena)
-cuatro= texto_grid(8, 4, '4', 'blue', cena)
-cinco= texto_grid(7, 2, '5', 'blue', cena)
+tres = texto_grid(7, 6, '3', 'gray', cena)
+cuatro= texto_grid(8, 4, '4', 'gray', cena)
+cinco= texto_grid(7, 2, '5', 'gray', cena)
 
 t = texto_grid (3, 10, 'Código de colores:', None, cena)
 
