@@ -1,7 +1,7 @@
 import random
 import threading
 import time
-import p
+
 
 class Filosofo(threading.Thread):
     semaforo = threading.Lock()
@@ -53,7 +53,7 @@ class Filosofo(threading.Thread):
         self.vez_comer+=1
     
         a = self.vez_comer
-        p.e1.set(a)
+       
 
     def liberar(self):
         Filosofo.semaforo.acquire()
@@ -72,3 +72,20 @@ class Filosofo(threading.Thread):
             self.liberar()
         
 
+#Programa
+comer = []
+numfilosfos = 5
+tiempo = 3
+#primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
+lista = []
+
+for i in range (numfilosfos):
+    lista.append(Filosofo(tiempo))
+
+for i in lista:
+    #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
+    i.start()
+    
+for a in lista:
+    a.join()
+    
