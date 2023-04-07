@@ -13,7 +13,7 @@ class Filosofo(threading.Thread):
     semaforo = threading.Lock()
     palillos= []
     estado = []
-    patata = []
+
     num = 0
     def __init__(self, tiempo, comer1):
         super().__init__()
@@ -75,12 +75,6 @@ class Filosofo(threading.Thread):
         e.insert(0, self.vez_comer)
         scrol.insert(INSERT,f'Filosofo {self.id} ha terminado de comer \n')
         
-        
-      
-        
-        
-        
-      
 
     def liberar(self):
         Filosofo.semaforo.acquire()
@@ -103,21 +97,25 @@ class Filosofo(threading.Thread):
 
 
 def texto_grid( f, c, palabra, color, vent) :
-    Label(vent, text = palabra, bg= color).grid(row=f, column=c)
+    a = Label(vent, text = palabra, bg= color)
+    a.grid(row=f, column=c)
+    return a
 
 def texto_place( f, c, palabra, vent):
-    ttk.Label(vent, text = palabra).place(x=f, y=c)
+    a = ttk.Label(vent, text = palabra)
+    a.place(x=f, y=c)
+    return a
 
-async def datos(dato):
-    return dato
     
 def entry( f, c, vent) :
     a = ttk.Entry(vent)
     a.place(x = f, y = c)
     return a
-#textvariable=tipo,
+
 def boton( f, c, palabra, vent):
-    ttk.Button(vent, text=palabra).grid(row=f, column=c)
+    a = ttk.Button(vent, text=palabra)
+    a.grid(row=f, column=c)
+    return a
     
 #Gráfica
 ventana = Tk() 
