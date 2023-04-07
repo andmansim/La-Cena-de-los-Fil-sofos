@@ -23,14 +23,27 @@ class Filosofo(threading.Thread):
         self.id = Filosofo.num
         Filosofo.num +=1
         self.vez_comer = 0
-        
         Filosofo.estado.append('pensando')
+        
         Filosofo.palillos.append(threading.Semaphore(0)) #establece el semaforo del palillo de la izquierda
         
         print(f'Filósofo {self.id} está {Filosofo.estado[self.id]}')
         
    
-   
+    def control(self):
+        if self.id == 0:
+            f = filo1
+        elif self.id == 1:
+            f = filo2
+        elif self.id == 2:
+            f = filo3
+        elif self.id == 3:
+            f = filo4 
+        elif self.id == 4:
+            f = filo5 
+        return f 
+        
+    
     def pensar(self): 
         a = random.randint(0,5)
         time.sleep(a)
@@ -39,6 +52,8 @@ class Filosofo(threading.Thread):
     def hambre(self):
         Filosofo.semaforo.acquire() #señala que tomará los palillos exclusión mutua
         Filosofo.estado[self.id] = 'hambriento'
+        f = self.control()
+        f.config(bg='pink')
         self.verificar(self.id) #Si no puede comer no se bloquea
         Filosofo.semaforo.release() #deja de señala que va a tomar los palillos
         Filosofo.palillos[self.id].acquire() #coge los palillos
@@ -53,6 +68,8 @@ class Filosofo(threading.Thread):
         
         if Filosofo.estado[a] == 'hambriento' and Filosofo.estado[ a - 1] != 'comiendo' and Filosofo.estado[a2] != 'comiendo':
             Filosofo.estado[a] = 'comiendo'
+            f = self.control()
+            f.config(bg='orange')
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
         
     def comer(self):
@@ -60,7 +77,7 @@ class Filosofo(threading.Thread):
         scrol.insert(INSERT,f'Filosofo {self.id} está {Filosofo.estado[self.id]} \n')
         time.sleep(3)
         print(f'Filosofo {self.id} ha terminado de comer \t')
-        self.vez_comer+=1
+        
         if self.id == 0:
             e = e1
         elif self.id == 1:
@@ -72,6 +89,7 @@ class Filosofo(threading.Thread):
         elif self.id == 4:
             e = e5
         e.delete(0, 'end')
+        self.vez_comer+=1
         e.insert(0, self.vez_comer)
         scrol.insert(INSERT,f'Filosofo {self.id} ha terminado de comer \n')
         
@@ -79,6 +97,8 @@ class Filosofo(threading.Thread):
     def liberar(self):
         Filosofo.semaforo.acquire()
         Filosofo.estado[self.id] = 'pensando'
+        f = self.control()
+        f.config(bg='white')
         self.verificar(self.id -1)
         self.verificar(self.id +1)
         Filosofo.semaforo.release()
@@ -123,7 +143,7 @@ cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
 cena.grid(column=1, row=1, padx=5, pady=5, sticky= 'w')
 
 #Filósofos
-filo0 = texto_grid(4, 4, 'Filósofo 1', 'pink', cena)
+filo1 = texto_grid(4, 4, 'Filósofo 1', 'pink', cena)
 filo5 = texto_grid(6, 2, 'Filósofo 5', 'orange', cena)
 filo3 = texto_grid(8, 3, 'Filósofo 3', 'orange', cena)
 filo2 = texto_grid(6, 7, 'Filósofo 2', 'white', cena)
@@ -202,6 +222,7 @@ botcreditos = boton(2, 5, 'Créditos', c)
 botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
+
 
 #ventana.after(2000,  )
 
