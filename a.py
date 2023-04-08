@@ -4,7 +4,7 @@ from tkinter import scrolledtext as st
 import random
 import threading
 import time
-
+import ctypes
 
 
 
@@ -77,10 +77,7 @@ class Filosofo(threading.Thread):
             Filosofo.palillos[a].release() #aumenta el semáforo de los palillos
             n = self.control(uno, dos, tres, cuatro, cinco)
             n.config(bg='blue')
-            
-    def __del__(self):
-        pass
-        
+
         
     def comer(self):
         print(f'Filosofo {self.id} está {Filosofo.estado[self.id]} \t')
@@ -111,6 +108,18 @@ class Filosofo(threading.Thread):
         n = self.control(uno, dos, tres, cuatro, cinco)
         n.config(bg='light blue')
     
+    def get_id(self):#cogemos el id del hilo para pararlo
+        if hasattr(self, '_thread_id'):
+            return self._thread_id
+        for id, thread in threading._active.items():
+            if thread is self:
+                return id
+    
+    def raise_exception(self):
+        thread_id = self.get_id()
+        resu = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
+        if resu > 1:
+            ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
     
     def run(self):
         #for i in range(self.tiempo):
@@ -120,15 +129,7 @@ class Filosofo(threading.Thread):
             self.comer()
             self.liberar()
             
-            
-class Pararhilo(threading.Thread):
-    def __init__(self):
-        super(Pararhilo, self).__init__()
-        self._stop_event= threading.Event()
-    def stop(self):
-        self._stop_event.set()
-    def stopped(self):
-        return self._stop_event.is_set()
+
 
 def texto_grid( f, c, palabra, color, vent) :
     a = Label(vent, text = palabra, bg= color)
@@ -161,8 +162,12 @@ def empezar():
     for i in lista:
         #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
         i.start()
-    
-    
+
+def parar1():
+    botpausar.config(state='disable')
+    for i in lista:
+        i.raise_exception()
+
 def cerrar_ventana():
     ventana.destroy()
 
@@ -209,8 +214,7 @@ tiempo = 3
 lista = []
 
 
-def parar1(lista):
-    del lista
+
 #caja Log
 l= ttk.LabelFrame(ventana, text='Log')
 l.grid(column=1, row=12, padx=5, pady=5, sticky= 'w')
@@ -249,15 +253,12 @@ botresert = boton(2, 4,'Resert', c)
 
 botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
-
-def parar1():
-    for i in lista:
-        del i
-''' hilo = threading.current_thread()
-    delete(filename)
-    #Pararhilo.stop(hilo)'''
-
 botpausar.config(command= parar1)
+
+
+
+
+
 
 
 ventana.mainloop()
