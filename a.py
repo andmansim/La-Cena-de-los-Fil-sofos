@@ -169,15 +169,15 @@ def parar1():
     for i in lista:
         i.raise_exception()
 
-def resetear():
-    
+def resetear(): #Ns resetear
+    for i in lista:
+        i.raise_exception()
+        
     for widget in l.winfo_children():
         if isinstance(widget, ttk.Entry):  # If this is an Entry widget 
             widget.delete(0,'end') # Delete all entries 
         
-        if isinstance(widget, st.ScrolledText):  # If this is an Entry widget 
-            widget.delete(0,'end') # Delete all entries 
-        
+    #scrol.delete(, 'end')
     filo1.config(bg='white')
     filo2.config(bg='white')
     filo3.config(bg='white')
@@ -190,11 +190,10 @@ def resetear():
     cinco.config(bg='gray')
     os.system('cls')
     empezar()
-'''for i in lista:
-        i.raise_exception()
-    os.system('cls')
-    cerrar_ventana()
-    empezar()'''
+    
+    
+    
+    
     
 def cerrar_ventana():
     ventana.destroy()
