@@ -5,6 +5,7 @@ import random
 import threading
 import time
 import ctypes
+import os
 
 
 
@@ -168,6 +169,33 @@ def parar1():
     for i in lista:
         i.raise_exception()
 
+def resetear():
+    
+    for widget in l.winfo_children():
+        if isinstance(widget, ttk.Entry):  # If this is an Entry widget 
+            widget.delete(0,'end') # Delete all entries 
+        
+        if isinstance(widget, st.ScrolledText):  # If this is an Entry widget 
+            widget.delete(0,'end') # Delete all entries 
+        
+    filo1.config(bg='white')
+    filo2.config(bg='white')
+    filo3.config(bg='white')
+    filo4.config(bg='white')
+    filo5.config(bg='white')
+    uno.config(bg='gray')
+    dos.config(bg='gray')
+    tres.config(bg='gray')
+    cuatro.config(bg='gray')
+    cinco.config(bg='gray')
+    os.system('cls')
+    empezar()
+'''for i in lista:
+        i.raise_exception()
+    os.system('cls')
+    cerrar_ventana()
+    empezar()'''
+    
 def cerrar_ventana():
     ventana.destroy()
 
@@ -254,26 +282,9 @@ botresert = boton(2, 4,'Resert', c)
 botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
 botpausar.config(command= parar1)
-
-
-
-
-
-
+botresert.config(command=resetear)
 
 ventana.mainloop()
 
-
-'''for i in lista:
-    #pasamos por cada filósofo para establecer un termpo de pensar, comer, etc.
-    i.start()
-'''
-'''
-for a in lista:
-    a.join()
-    
-for b in lista:
-    print(b.id, b.vez_comer)
-'''
 
 
