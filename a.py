@@ -189,8 +189,10 @@ def resetear(): #Ns resetear
     cuatro.config(bg='gray')
     cinco.config(bg='gray')
     os.system('cls')
+    scrol.delete('1.0', 'end')
     lista.clear()
     Filosofo.num=0
+    time.sleep(3)
     empezar()
     
 def ventana_e():
