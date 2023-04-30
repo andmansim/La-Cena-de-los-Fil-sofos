@@ -9,7 +9,7 @@ import os
 
 
 
-
+#CLASE FILÓSOFOS
 class Filosofo(threading.Thread):
     semaforo = threading.Lock()
     palillos= []
@@ -131,7 +131,7 @@ class Filosofo(threading.Thread):
             self.liberar()
             
 
-
+#FUNCIONES DE LOS BOTONES Y CUADROS DE TEXTO
 def texto_grid( f, c, palabra, color, vent) :
     a = Label(vent, text = palabra, bg= color)
     a.grid(row=f, column=c)
@@ -201,25 +201,26 @@ def ventana_e():
 def cerrar_ventana():
     ventana.destroy()
 
-#Gráfica
+#GRÁFICA
 ventana = Tk() 
 ventana.title('La Cena de los Filósofos')
 cena= ttk.LabelFrame(ventana, text='La Cena de los Filósofos')
 cena.grid(column=1, row=1, padx=5, pady=5, sticky= 'w')
 
-#Filósofos
+#Filósofos cuadros
 filo1 = texto_grid(4, 4, 'Filósofo 1', 'white', cena)
 filo5 = texto_grid(6, 2, 'Filósofo 5', 'white', cena)
 filo3 = texto_grid(8, 3, 'Filósofo 3', 'white', cena)
 filo2 = texto_grid(6, 7, 'Filósofo 2', 'white', cena)
 filo4 = texto_grid(8, 5, 'Filósofo 4', 'white', cena)
-#números
+#números cuadros
 uno = texto_grid(4, 3, '1', 'gray', cena)
 dos = texto_grid(5, 5, '2', 'gray', cena)
 tres = texto_grid(7, 6, '3', 'gray', cena)
 cuatro= texto_grid(8, 4, '4', 'gray', cena)
 cinco= texto_grid(7, 2, '5', 'gray', cena)
 
+#clasificación de colores
 t = texto_grid (3, 10, 'Código de colores:', None, cena)
 
 rosa = texto_grid(5, 10, None, 'pink', cena)
@@ -237,7 +238,7 @@ pl=texto_grid(10, 11, 'Palillo libre', None, cena)
 
 
 
-#Programa
+#MAIN
 numfilosfos = 5
 tiempo = 3
 #primero ponemos a todos los filósofos a pensar y los guardamos en una lista para comprobar los estados
@@ -274,16 +275,14 @@ c.grid(column=1, row=14, padx=5, pady=5, sticky= 'w')
 crear_log= Checkbutton(c, text= 'Crear un log', variable= IntVar())
 crear_log.grid(column=0, row=2, padx=5, pady=5, sticky= 'w')
 
+# creación de los botones
 botsalir = boton(1, 5, 'Salir', c)
-
 botcreditos = boton(2, 5, 'Créditos', c)
 botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
 
-
-
-
+#configuración de los botones
 botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
 botpausar.config(command= parar1)
