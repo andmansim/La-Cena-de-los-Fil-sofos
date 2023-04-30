@@ -156,9 +156,8 @@ def boton( f, c, palabra, vent):
 
 def empezar():
     botiniciar.config(state='disable')
-    numero = 0
+   
     for i in range (numfilosfos):
-        numero +=1
         lista.append(Filosofo(tiempo))
 
     for i in lista:
@@ -194,7 +193,9 @@ def resetear(): #Ns resetear
     Filosofo.num=0
     empezar()
     
-    
+def ventana_e():
+    messagebox.showinfo('Créditos', 'Creado por: Andrea Manuel Simón')
+      
 def cerrar_ventana():
     ventana.destroy()
 
@@ -279,10 +280,7 @@ botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
 
 
-def ventana_e():
-    root = Tk()
-    messagebox.showinfo('Céditos', 'Creado por: Andrea Manuel Simón')
-    root.mainloop()
+
 
 botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
