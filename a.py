@@ -1,5 +1,5 @@
 from tkinter import*
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from tkinter import scrolledtext as st
 import random
 import threading
@@ -195,9 +195,6 @@ def resetear(): #Ns resetear
     empezar()
     
     
-    
-    
-    
 def cerrar_ventana():
     ventana.destroy()
 
@@ -281,11 +278,17 @@ botpausar = boton(2, 3,'Pausar',c)
 botiniciar= boton(2, 2, 'Iniciar', c)
 botresert = boton(2, 4,'Resert', c)
 
+
+def ventana_e():
+    root = Tk()
+    messagebox.showinfo('Céditos', 'Creado por: Andrea Manuel Simón')
+    root.mainloop()
+
 botsalir.config(command=cerrar_ventana)
 botiniciar.config(command=empezar)
 botpausar.config(command= parar1)
 botresert.config(command=resetear)
-
+botcreditos.config(command=ventana_e)
 ventana.mainloop()
 
 
