@@ -189,6 +189,10 @@ def resetear(): #Ns resetear
     cuatro.config(bg='gray')
     cinco.config(bg='gray')
     os.system('cls')
+    lista.clear()
+    print(lista)
+    numfilosfos = 5
+    tiempo = 3
     empezar()
     
     
