@@ -300,3 +300,4 @@ botcreditos.config(command=ventana_e)
 ventana.mainloop()
 
 ```
+![capFilo](/capFilosofos.png)
