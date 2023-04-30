@@ -156,8 +156,9 @@ def boton( f, c, palabra, vent):
 
 def empezar():
     botiniciar.config(state='disable')
-    
+    numero = 0
     for i in range (numfilosfos):
+        numero +=1
         lista.append(Filosofo(tiempo))
 
     for i in lista:
